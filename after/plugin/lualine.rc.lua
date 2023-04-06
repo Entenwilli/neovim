@@ -5,24 +5,24 @@ if (not status) then return end
 lualine.setup {
 	options = {
 		icons_enabled = true,
-		theme = 'solarized_dark',
-		section_separators = { left = '', right = ''},
-		component_separators = { left = '', right = ''},
-		disabled_filetypes = { }
+		theme = 'tokyonight',
+		section_separators = { left = '', right = '' },
+		component_separators = { left = '', right = '' },
+		disabled_filetypes = {}
 	},
 	sections = {
-		lualine_a = { 'mode '},
+		lualine_a = { 'mode ' },
 		lualine_b = { 'branch' },
-		lualine_c = {{
+		lualine_c = { {
 			'filename',
 			-- Display filestatus
 			file_status = true,
 			-- Just display filename
 			path = 0
-		}},
+		} },
 		lualine_x = {
 			{
-				'diagnostics', 
+				'diagnostics',
 				sources = { 'nvim_diagnostic' },
 				symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
 			},
