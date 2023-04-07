@@ -3,18 +3,30 @@ local status, cmp = pcall(require, 'cmp')
 if (not status) then return end
 
 local lspkind = require('lspkind')
+local luasnip = require('luasnip')
 
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			require('luasnip').lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end
 	},
 	mapping = cmp.mapping.preset.insert({
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		-- Show auto completion
 		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.close(),
+		-- Select next item
+		['<Tab>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end, { 'i', 's' }),
+		-- Trigger autocompletion
 		['<CR>'] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true
