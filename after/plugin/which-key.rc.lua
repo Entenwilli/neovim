@@ -2,6 +2,17 @@ local status, key = pcall(require, 'which-key')
 
 if (not status) then return end
 
+local Terminal = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({
+	cmd = 'lazygit',
+	direction = 'float',
+	hidden = true
+})
+
+function _lazygit_toggle()
+	lazygit:toggle()
+end
+
 vim.g.mapleader = ' '
 
 key.register({
@@ -22,6 +33,10 @@ key.register({
 	l = {
 		name = 'LSP',
 		f = { '', 'Format' }
+	},
+	g = {
+		name = 'Git',
+		g = { function() _lazygit_toggle() end, 'Lazygit' }
 	}
 }, {
 	prefix = '<leader>'

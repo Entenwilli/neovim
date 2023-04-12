@@ -11,6 +11,7 @@ packer.startup(function(use)
 	use 'nvim-lualine/lualine.nvim'
 	-- Color scheme
 	use 'folke/tokyonight.nvim'
+	use 'nvim-tree/nvim-web-devicons'
 	-- LSP setup
 	use 'neovim/nvim-lspconfig'
 	-- LSP installer
@@ -41,5 +42,13 @@ packer.startup(function(use)
 	use 'folke/which-key.nvim'
 	-- File explorer
 	use 'nvim-tree/nvim-tree.lua'
-	use 'nvim-tree/nvim-web-devicons'
+	-- Terminal
+	use 'akinsho/toggleterm.nvim'
+	-- Greeter
+	use {
+		'goolord/alpha-nvim',
+		config = function()
+			require('alpha').setup(require('alpha.themes.dashboard').config)
+		end
+	}
 end)
