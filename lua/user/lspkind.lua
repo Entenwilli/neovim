@@ -3,11 +3,8 @@ local status, lspkind = pcall(require, 'lspkind')
 if (not status) then return end
 
 lspkind.init({
-	-- defines how annotations are shown
 	mode = 'symbol_text',
-	-- default symbol map
 	preset = 'default',
-	-- override preset symbols
 	symbol_map = {
 		Text = "",
 		Method = "",

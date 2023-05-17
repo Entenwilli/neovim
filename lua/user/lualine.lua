@@ -1,5 +1,4 @@
 local status, lualine = pcall(require, 'lualine')
-
 if (not status) then return end
 
 lualine.setup {
@@ -15,9 +14,7 @@ lualine.setup {
 		lualine_b = { 'branch' },
 		lualine_c = { {
 			'filename',
-			-- Display filestatus
 			file_status = true,
-			-- Just display filename
 			path = 0
 		} },
 		lualine_x = {

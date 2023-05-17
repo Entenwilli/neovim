@@ -1,10 +1,8 @@
 local status, theme = pcall(require, 'tokyonight')
-
 if (not status) then return end
 
 theme.setup({
-	style = 'moon',
-	terminal_colors = true
+  style = 'night'
 })
 
-vim.cmd [[colorscheme tokyonight-moon]]
+vim.cmd [[colorscheme tokyonight-night]]
