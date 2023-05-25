@@ -70,11 +70,11 @@ local setup = {
 }
 
 local mappings = {
-	['a'] = { "<cmd>Alpha<cr>", "Alpha" },
-  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
-	['f'] = { "<cmd>Telescope find_files<cr>", "Find files" },
-	['F'] = { "<cmd>Telescope live_grep<cr>", "Find text" },
-	['P'] = { "<cmd>Telescope projects<cr>", "Projects" },
+	["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+	["e"] = { "<cmd>NeoTreeFocusToggle<cr>", "Explorer" },
+	["f"] = { "<cmd>Telescope find_files<cr>", "Find files" },
+	["F"] = { "<cmd>Telescope live_grep<cr>", "Find text" },
+	["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
 	g = {
 		name = "git",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
@@ -91,13 +91,14 @@ local mappings = {
 			"Workspace Diagnostics",
 		},
 		f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
+		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		j = {
-			"<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+			"<cmd>lua vim.diagnostic.goto_next()<CR>",
 			"Next Diagnostic",
 		},
 		k = {
-			"<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+			"<cmd>lua vim.diagnostic.goto_prev()<cr>",
 			"Prev Diagnostic",
 		},
 		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
@@ -109,11 +110,11 @@ local mappings = {
 			"Workspace Symbols",
 		},
 	},
-  t = {
-    name = 'Terminal',
-    f = { '<cmd>ToggleTerm direction=float<cr>', 'Float' },
-    h = { '<cmd>ToggleTerm size=10 direction=horizontal<cr>', 'Horizontal' },
-  }
+	t = {
+		name = "Terminal",
+		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+	},
 }
 
 which_key.setup(setup)

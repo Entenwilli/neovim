@@ -5,13 +5,13 @@ vim.opt.undofile = true
 vim.opt.writebackup = false
 
 -- Allow neovim to access system clipboard
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 
 -- Set neovim command height
 vim.opt.cmdheight = 2
 
 -- Set endoding
-vim.opt.fileencoding = 'utf-8'
+vim.opt.fileencoding = "utf-8"
 
 -- Set tab options
 vim.opt.expandtab = true
@@ -24,7 +24,7 @@ vim.opt.relativenumber = false
 vim.opt.numberwidth = 4
 
 -- Set completion options
-vim.opt.completeopt = { 'menuone', 'noselect' }
+vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.updatetime = 300
 
 -- Hide mode
@@ -42,12 +42,18 @@ vim.opt.ignorecase = true
 vim.opt.wrap = false
 
 -- Set shell
-vim.opt.shell = 'fish'
+vim.opt.shell = "fish"
 
 -- Blending options
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.winblend = 0
-vim.opt.wildoptions = 'pum'
+vim.opt.wildoptions = "pum"
 vim.opt.pumblend = 5
-vim.opt.background = 'dark'
+vim.opt.background = "dark"
+
+-- Neovide settings
+if vim.g.neovide then
+	vim.opt.guifont = "Fira Code Nerd Font:h10" -- the font used in graphical neovim applications
+	vim.g.neovide_scale_factor = 0.7
+end

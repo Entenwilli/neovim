@@ -84,10 +84,13 @@ M.on_attach = function(client, bufnr)
 	end
 	illuminate.configure({
 		filetypes_denylist = {
-			"help",
-			"dashboard",
-			"lazy",
-			"NvimTree_1",
+			"fugitive",
+			"alpha",
+			"NvimTree",
+			"TelescopePrompt",
+			"TelescopeResult",
+			"DressingInput",
+			"",
 		},
 	})
 	illuminate.on_attach(client)

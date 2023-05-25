@@ -1,10 +1,12 @@
-local status, lspkind = pcall(require, 'lspkind')
+local status, lspkind = pcall(require, "lspkind")
 
-if (not status) then return end
+if not status then
+	return
+end
 
 lspkind.init({
-	mode = 'symbol_text',
-	preset = 'default',
+	mode = "symbol_text",
+	preset = "default",
 	symbol_map = {
 		Text = "",
 		Method = "",
@@ -30,6 +32,6 @@ lspkind.init({
 		Struct = "פּ",
 		Event = "",
 		Operator = "",
-		TypeParameter = ""
+		TypeParameter = "",
 	},
 })
