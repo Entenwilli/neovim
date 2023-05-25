@@ -71,4 +71,7 @@ cmp.setup {
     behaviour = cmp.ConfirmBehavior.Replace,
     select = false,
   },
+  experimental = {
+    ghost_text = true,
+  }
 }

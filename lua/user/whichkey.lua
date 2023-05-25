@@ -79,6 +79,7 @@ local mappings = {
 		name = "git",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
 	},
+	K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	l = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -91,7 +92,7 @@ local mappings = {
 			"Workspace Diagnostics",
 		},
 		f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
-		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>" },
+		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature help" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		j = {
 			"<cmd>lua vim.diagnostic.goto_next()<CR>",
@@ -117,5 +118,13 @@ local mappings = {
 	},
 }
 
+local lsp_mappings = {
+	D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Show declaration" },
+	d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Show definition" },
+	I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Show implementations" },
+	r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Show references" },
+}
+
 which_key.setup(setup)
 which_key.register(mappings, { prefix = "<leader>" })
+which_key.register(lsp_mappings, { prefix = "g" })
