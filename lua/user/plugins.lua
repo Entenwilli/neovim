@@ -23,21 +23,34 @@ lazy.setup({
 	"folke/tokyonight.nvim",
 
 	-- Autocompletions
-	"hrsh7th/nvim-cmp",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
-	"hrsh7th/cmp-cmdline",
-	"saadparwaiz1/cmp_luasnip",
-	"hrsh7th/cmp-nvim-lsp",
+	{
+		"hrsh7th/nvim-cmp",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lsp",
+		},
+	},
 
 	-- Snippets
 	"L3MON4D3/LuaSnip",
 
 	-- LSP
-	"neovim/nvim-lspconfig",
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
-	"jose-elias-alvarez/null-ls.nvim",
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		},
+	},
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+	},
 	"onsails/lspkind.nvim",
 
 	-- Telescope
@@ -51,13 +64,15 @@ lazy.setup({
 	"RRethy/vim-illuminate",
 
 	-- Autopairs
-	"windwp/nvim-autopairs",
+	{
+		"windwp/nvim-autopairs",
+		lazy = true,
+	},
 
 	-- Gitsigns
 	"lewis6991/gitsigns.nvim",
 
 	-- Neovim tree
-	"nvim-tree/nvim-web-devicons",
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		dependencies = {
