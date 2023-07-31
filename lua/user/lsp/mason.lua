@@ -8,8 +8,12 @@ local servers = {
   'lua_ls',
   'html',
   'rust_analyzer',
+  'marksman',
+  'pyright',
+  'ltex',
   'texlab',
-  'marksman'
+  'astro',
+  'tailwindcss'
 }
 
 local settings = {

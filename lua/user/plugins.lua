@@ -125,4 +125,5 @@ lazy.setup({
 		},
 	},
 	"ray-x/lsp_signature.nvim",
+	"MunifTanjim/prettier.nvim",
 })

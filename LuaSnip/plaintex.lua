@@ -45,11 +45,22 @@ return {
 		{ trig = "begin", dscr = "A LaTeX environment" },
 		fmta(
 			[[
-				\begin{<>}
+				\begin{<>}<>
 					<>
 				\end{<>}
 		  ]],
-			{ i(1), i(2), rep(1) }
+			{ i(1), i(2), i(3), rep(1) }
+		)
+	),
+	snippet(
+		{ trig = "frame", dscr = "A LaTeX Beamer frame" },
+		fmta(
+			[[
+        \begin{frame}{<>}
+          <>
+        \end{frame}
+      ]],
+			{ i(1), i(2) }
 		)
 	),
 }
