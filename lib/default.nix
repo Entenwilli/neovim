@@ -76,6 +76,9 @@ in rec {
   in {
     inherit extraConfig extraPackages plugins;
     defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
     enable = true;
     withNodeJs = true;
     withPython3 = true;
