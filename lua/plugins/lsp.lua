@@ -30,7 +30,7 @@ return {
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = "", 
+            [vim.diagnostic.severity.ERROR] = "",
             [vim.diagnostic.severity.WARN] = "",
             [vim.diagnostic.severity.HINT] = "",
             [vim.diagnostic.severity.INFO] = "",
@@ -79,6 +79,17 @@ return {
                 callSnippet = "Replace",
               },
             },
+            ltex = {
+              language = "en-us",
+              dictionary = {
+                ["en-us"] = {""}
+              },
+              additionalrules = {
+                enablepickyrules = true,
+                mothertongue = "de"
+              },
+              completionenabled = true
+            },
           },
         },
       },
@@ -102,7 +113,7 @@ return {
 
       -- setup keymaps
       lsp_utils.on_attach(function(client, buffer)
-        require("user.lspkeymaps").on_attach(client, buffer)
+        require('user.keymaps').on_attach(client, buffer)
       end)
 
       local register_capability = vim.lsp.handlers["client/registerCapability"]
@@ -112,7 +123,7 @@ return {
         local ret = register_capability(err, res, ctx)
         local client = vim.lsp.get_client_by_id(ctx.client_id)
         local buffer = vim.api.nvim_get_current_buf()
-        require("user.lspkeymaps").on_attach(client, buffer)
+        require('user.keymaps').on_attach(client, buffer)
         return ret
       end
 

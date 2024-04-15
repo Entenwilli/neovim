@@ -39,6 +39,9 @@ in rec {
     pkgs.haskell-language-server
     pkgs.lua-language-server
     pkgs.rust-analyzer
+    pkgs.ltex-ls
+    pkgs.marksman
+    pkgs.texlab
 
     # Formatter
     pkgs.alejandra
