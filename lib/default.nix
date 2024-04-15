@@ -74,6 +74,15 @@ in rec {
     extraPackages = mkExtraPackages { inherit system; };
     plugins = mkNeovimPlugins { inherit system; };
     pkgs = legacyPackages.${system};
+    neovim-unwrapped-dev = pkgs.neovim-unwrapped.overrideAttrs (old: {
+        version = "0.10.0-dev";
+        src = pkgs.fetchFromGitHub {
+          owner = "neovim";
+          repo = "neovim";
+          rev = "5371ed36b73c006cfdebb7aa8d98703967f0d0fd";
+          hash = "sha256-CcaBqA0yFCffNPmXOJTo8c9v1jrEBiqAl8CG5Dj5YxE=";
+        };
+      });
   in {
     inherit extraConfig extraPackages plugins;
     defaultEditor = true;
@@ -84,6 +93,6 @@ in rec {
     withNodeJs = true;
     withPython3 = true;
     withRuby = true;
-    package = pkgs.neovim-unwrapped;
+    package = neovim-unwrapped-dev;
   };
 }
