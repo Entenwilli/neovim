@@ -73,6 +73,7 @@ in rec {
     extraConfig = mkExtraConfig;
     extraPackages = mkExtraPackages { inherit system; };
     plugins = mkNeovimPlugins { inherit system; };
+    pkgs = legacyPackages.${system};
   in {
     inherit extraConfig extraPackages plugins;
     defaultEditor = true;
@@ -83,5 +84,6 @@ in rec {
     withNodeJs = true;
     withPython3 = true;
     withRuby = true;
+    package = pkgs.neovim-unwrapped;
   };
 }
