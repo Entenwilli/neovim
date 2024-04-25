@@ -45,7 +45,7 @@ in rec {
     pkgs.ltex-ls
     pkgs.marksman
     pkgs.texlab
-    pkgs.libclangd
+    pkgs.libclang
 
     # Formatter
     pkgs.alejandra
