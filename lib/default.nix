@@ -29,6 +29,9 @@ in rec {
       config.allowUnfree = true;
     };
   in [
+    # Installation utilities
+    pkgs.unzip
+
     # Language servers
     nodePackages."bash-language-server"
     nodePackages."diagnostic-languageserver"
@@ -42,6 +45,7 @@ in rec {
     pkgs.ltex-ls
     pkgs.marksman
     pkgs.texlab
+    pkgs.libclangd
 
     # Formatter
     pkgs.alejandra
