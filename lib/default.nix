@@ -29,8 +29,13 @@ in rec {
       config.allowUnfree = true;
     };
   in [
-    # Installation utilities
+    # Installation utilities (for mason)
     pkgs.unzip
+    pkgs.git
+    pkgs.curl
+    pkgs.gnutar
+    pkgs.gzip
+    pkgs.patchelf
 
     # Language servers
     nodePackages."bash-language-server"
@@ -46,6 +51,7 @@ in rec {
     pkgs.marksman
     pkgs.texlab
     pkgs.libclang
+    pkgs.nil
 
     # Formatter
     pkgs.alejandra

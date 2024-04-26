@@ -233,8 +233,20 @@ return {
     opts = {
       PATH = 'append',
       ensure_installed = {
+        "astro-language-server",
+        "bash-language-server",
+        "clangd",
+        "dockerfile-language-server",
+        "html-lsp",
+        "ltex-ls",
+        "lua-language-server",
+        "nil",
+        "rust-analyzer",
         "stylua",
         "shfmt",
+        "tailwindcss-language-server",
+        "texlab",
+        "typescript-language-server",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

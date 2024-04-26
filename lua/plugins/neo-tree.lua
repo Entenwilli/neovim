@@ -4,6 +4,11 @@ return {
   {
     'nvim-neo-tree/neo-tree.nvim',
     cmd = 'Neotree',
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
     deactivate = function ()
       vim.cmd([[Neotree close]])
     end,
@@ -35,15 +40,7 @@ return {
       },
       source_selector = {
         winbar = true,
-        statusline = false, -- toggle to show selector on statusline
-        content_layout = "center",
-        tabs_layout = "equal",
-        sources = {
-          { source = "filesystem", display_name = "  " },
-          { source = "buffers", display_name = "  " },
-          { source = "git_status", display_name = "  " },
-          { source = "diagnostics", display_name = " 裂" },
-        },
+        statusline = true
       },
       default_component_configs = {
         indent = {
