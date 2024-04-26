@@ -50,7 +50,7 @@ in rec {
     pkgs.ltex-ls
     pkgs.marksman
     pkgs.texlab
-    pkgs.libclang
+    pkgs.clang-tools
     pkgs.nil
 
     # Formatter
