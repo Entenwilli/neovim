@@ -57,6 +57,7 @@ in rec {
     pkgs.alejandra
     pkgs.rustfmt
     pkgs.stylua
+    pkgs.prettierd
   ];
 
   mkExtraConfig = ''

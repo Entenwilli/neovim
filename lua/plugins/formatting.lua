@@ -61,11 +61,17 @@ return {
           quiet = false, -- not recommended to change
           lsp_fallback = true, -- not recommended to change
         },
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_fallback = true,
+        },
         ---@type table<string, conform.FormatterUnit[]>
         formatters_by_ft = {
           lua = { "stylua" },
           fish = { "fish_indent" },
           sh = { "shfmt" },
+          javascript = { "prettierd" },
+          nix = { "alejandra" },
         },
         -- The options you set here will be merged with the builtin formatters.
         -- You can also define any custom formatters here.
