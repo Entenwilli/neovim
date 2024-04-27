@@ -4,3 +4,5 @@ require 'user.keymaps'
 require 'user.lazy'
 require 'user.plugins'
 
+require 'user.formatterutils'.setup()
+

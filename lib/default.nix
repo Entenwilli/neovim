@@ -1,7 +1,7 @@
-{ inputs }: let
+{inputs}: let
   inherit (inputs.nixpkgs) legacyPackages;
 in rec {
-  mkVimPlugin = { system }: let
+  mkVimPlugin = {system}: let
     inherit (pkgs) vimUtils;
     inherit (vimUtils) buildVimPlugin;
     pkgs = legacyPackages.${system};
@@ -9,20 +9,20 @@ in rec {
     buildVimPlugin {
       name = "EntenVim";
       postInstall = ''
-      rm -rf $out/flake.lock
-      rm -rf $out/flake.nix
-      rm -rf $out/lib
+        rm -rf $out/flake.lock
+        rm -rf $out/flake.nix
+        rm -rf $out/lib
       '';
       src = ../.;
     };
 
-  mkNeovimPlugins = { system }: let
-    EntenVim = mkVimPlugin { inherit system; };
+  mkNeovimPlugins = {system}: let
+    EntenVim = mkVimPlugin {inherit system;};
   in [
     EntenVim
   ];
 
-  mkExtraPackages = { system }: let
+  mkExtraPackages = {system}: let
     inherit (pkgs) nodePackages python3Packages;
     pkgs = import inputs.nixpkgs {
       inherit system;
@@ -66,16 +66,16 @@ in rec {
     EOF
   '';
 
-  mkNeovim = { system }: let
+  mkNeovim = {system}: let
     inherit (pkgs) lib neovim;
-    extraPackages = mkExtraPackages { inherit system; };
+    extraPackages = mkExtraPackages {inherit system;};
     pkgs = legacyPackages.${system};
-    start = mkNeovimPlugins { inherit system; };
+    start = mkNeovimPlugins {inherit system;};
   in
     neovim.override {
       configure = {
         customRC = mkExtraConfig;
-        packages.main = { inherit start; };
+        packages.main = {inherit start;};
       };
       extraMakeWrapperArgs = ''--suffix PATH : "${lib.makeBinPath extraPackages}"'';
       withNodeJs = true;
@@ -83,10 +83,10 @@ in rec {
       withRuby = true;
     };
 
-  mkHomeManager = { system }: let
+  mkHomeManager = {system}: let
     extraConfig = mkExtraConfig;
-    extraPackages = mkExtraPackages { inherit system; };
-    plugins = mkNeovimPlugins { inherit system; };
+    extraPackages = mkExtraPackages {inherit system;};
+    plugins = mkNeovimPlugins {inherit system;};
     pkgs = legacyPackages.${system};
   in {
     inherit extraConfig extraPackages plugins;
