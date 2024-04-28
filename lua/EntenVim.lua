@@ -1,8 +1,10 @@
-require 'user.options'
-require 'user.keymaps'
+-- Ensure uv is loaded
+vim.uv = vim.uv or vim.loop
 
-require 'user.lazy'
-require 'user.plugins'
+-- Setup lazy
+require("entenvim.user.lazy")
 
-require 'user.formatterutils'.setup()
+-- Load user configuration
+require("entenvim.user").setup()
 
+require("entenvim.user.formatterutils").setup()
