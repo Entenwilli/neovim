@@ -238,6 +238,7 @@ return {
 				"clangd",
 				"dockerfile-language-server",
 				"html-lsp",
+				"latexindent",
 				"ltex-ls",
 				"lua-language-server",
 				"nil",

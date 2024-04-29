@@ -54,6 +54,7 @@ return {
 		opts = function()
 			---@class ConformOpts
 			local opts = {
+				log_level = vim.log.levels.DEBUG,
 				-- LazyVim will use these options when formatting with the conform.nvim formatter
 				format = {
 					timeout_ms = 3000,
@@ -68,11 +69,19 @@ return {
 					sh = { "shfmt" },
 					javascript = { "prettierd" },
 					nix = { "alejandra" },
+					latex = { "latex_fmt" },
+					tex = { "latex_fmt" },
+					plaintex = { "latex_fmt" },
 				},
 				-- The options you set here will be merged with the builtin formatters.
 				-- You can also define any custom formatters here.
 				---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
 				formatters = {
+					latex_fmt = {
+						command = "latexindent.pl",
+						args = { "-" },
+						stdin = true,
+					},
 					injected = { options = { ignore_errors = true } },
 					-- # Example of using dprint only when a dprint.json file is present
 					-- dprint = {

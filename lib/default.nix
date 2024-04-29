@@ -58,6 +58,7 @@ in rec {
     pkgs.rustfmt
     pkgs.stylua
     pkgs.prettierd
+    pkgs.perl538Packages.LatexIndent
   ];
 
   mkExtraConfig = ''
