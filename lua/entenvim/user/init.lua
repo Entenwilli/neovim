@@ -36,6 +36,8 @@ function M.setup(opts)
 	})
 	EntenVim.track()
 
+	EntenVim.plugin.setup()
+
 	require("entenvim.user.options")
 	require("entenvim.user.keymaps")
 	require("entenvim.user.plugins")

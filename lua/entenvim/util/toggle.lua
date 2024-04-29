@@ -1,4 +1,4 @@
----@class lazyvim.util.toggle
+---@class entenvim.util.toggle
 local M = {}
 
 ---@param silent boolean?

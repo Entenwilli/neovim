@@ -181,13 +181,6 @@ return {
 	},
 	{
 		"folke/neodev.nvim",
-		opts = {
-			override = function(root_dir, options)
-				if root_dir:find("/home/felix/development/nixos-neovim/", 1, true) == 1 then
-					options.enabled = true
-					options.plugins = true
-				end
-			end,
-		},
+		opts = {},
 	},
 }

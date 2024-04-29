@@ -1,7 +1,3 @@
-local lsp_utils = require("user.lsputils")
-local formatter_utils = require("user.formatterutils")
-local toggle_utils = require("user.toggleutils")
-
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -109,11 +105,15 @@ return {
 		---@param opts PluginLspOpts
 		config = function(_, opts)
 			-- setup autoformat
-			formatter_utils.register(lsp_utils.formatter())
+			EntenVim.format.register(EntenVim.lsp.formatter())
+
+			-- Setup neoconf
+			require("neoconf").setup()
+			require("neodev").setup()
 
 			-- setup keymaps
-			lsp_utils.on_attach(function(client, buffer)
-				require("user.keymaps").on_attach(client, buffer)
+			EntenVim.lsp.on_attach(function(client, buffer)
+				require("entenvim.user.keymaps").on_attach(client, buffer)
 			end)
 
 			local register_capability = vim.lsp.handlers["client/registerCapability"]
@@ -123,7 +123,7 @@ return {
 				local ret = register_capability(err, res, ctx)
 				local client = vim.lsp.get_client_by_id(ctx.client_id)
 				local buffer = vim.api.nvim_get_current_buf()
-				require("user.keymaps").on_attach(client, buffer)
+				require("entenvim.user.keymaps").on_attach(client, buffer)
 				return ret
 			end
 
@@ -138,16 +138,16 @@ return {
 
 			-- inlay hints
 			if opts.inlay_hints.enabled then
-				lsp_utils.on_attach(function(client, buffer)
+				EntenVim.lsp.on_attach(function(client, buffer)
 					if client.supports_method("textDocument/inlayHint") then
-						toggle_utils.inlay_hints(buffer, true)
+						EntenVim.toggle.inlay_hints(buffer, true)
 					end
 				end)
 			end
 
 			-- code lens
 			if opts.codelens.enabled and vim.lsp.codelens then
-				lsp_utils.on_attach(function(client, buffer)
+				EntenVim.lsp.on_attach(function(client, buffer)
 					if client.supports_method("textDocument/codeLens") then
 						vim.lsp.codelens.refresh()
 						--- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
@@ -162,7 +162,7 @@ return {
 			if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
 				opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
 					or function(diagnostic)
-						local icons = require("user.icons").diagnostics
+						local icons = require("entenvim.user.icons").diagnostics
 						for d, icon in pairs(icons) do
 							if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
 								return icon

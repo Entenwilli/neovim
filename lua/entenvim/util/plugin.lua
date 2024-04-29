@@ -1,4 +1,4 @@
----@class util.plugin
+---@class entenvim.util.plugin
 local M = {}
 M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
@@ -61,3 +61,5 @@ function M.register_lazy_file_event()
 		end,
 	})
 end
+
+return M
