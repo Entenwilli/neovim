@@ -17,6 +17,7 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 
 -- Enable line numbers
 vim.opt.number = true
@@ -33,6 +34,7 @@ vim.opt.showmode = false
 -- Set Smart identation and casing
 vim.opt.smartcase = true
 vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 -- Search options
 vim.opt.hlsearch = true
