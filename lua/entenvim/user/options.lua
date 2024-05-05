@@ -33,8 +33,6 @@ vim.opt.showmode = false
 
 -- Set Smart identation and casing
 vim.opt.smartcase = true
-vim.opt.smartindent = true
-vim.opt.autoindent = true
 
 -- Search options
 vim.opt.hlsearch = true

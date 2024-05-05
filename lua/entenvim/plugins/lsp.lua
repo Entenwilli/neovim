@@ -88,17 +88,7 @@ return {
 						},
 					},
 				},
-				nil_ls = {
-					settings = {
-						["nil"] = {
-							nix = {
-								flake = {
-									autoEvalInputs = true,
-								},
-							},
-						},
-					},
-				},
+				nil_ls = {},
 			},
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig

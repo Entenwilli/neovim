@@ -51,7 +51,6 @@ return {
 			highlight = { enable = true },
 			indent = {
 				enable = true,
-				disable = { "nix" },
 			},
 			ensure_installed = {
 				"bash",
