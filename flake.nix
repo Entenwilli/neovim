@@ -35,5 +35,6 @@
         type = "app";
       };
     });
+    homeManagerModules.default = import ./lib/homemanager.nix self;
   };
 }
