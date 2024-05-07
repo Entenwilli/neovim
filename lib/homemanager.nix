@@ -1,15 +1,12 @@
-self:
-{
+self: {
   config,
   lib,
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.programs.entenvim;
-in
-{
+in {
   options = {
     programs.entenvim = {
       enable = mkEnableOption "EntenVim";
@@ -73,19 +70,19 @@ in
     };
   };
 
-  config =
-    let
-      nvim = self.packages.${pkgs.system}.neovim.override {
-        inherit (cfg)
-          appName
-          self-contained
-          viAlias
-          vimAlias
-          ;
-      };
-    in
+  config = let
+    nvim = self.packages.${pkgs.system}.neovim.override {
+      inherit
+        (cfg)
+        appName
+        self-contained
+        viAlias
+        vimAlias
+        ;
+    };
+  in
     mkIf cfg.enable {
-      home.packages = [ nvim ];
+      home.packages = [nvim];
 
       home.sessionVariables = {
         # should be like that but many programs don't respect VISUAL in favor of EDITOR so...
@@ -101,7 +98,7 @@ in
         recursive = true;
         onChange =
           ''
-            rm - rf ${config.xdg.cacheHome}/${cfg.appName}
+            rm -rf ${config.xdg.cacheHome}/${cfg.appName}
           ''
           + lib.optionalString cfg.cleanLspLog ''
             rm -f ${config.xdg.stateHome}/${cfg.appName}/lsp.log
@@ -113,8 +110,8 @@ in
         ".nvim.lua"
       ];
 
-      programs.bash.shellAliases = mkIf cfg.vimdiffAlias { vimdiff = "nvim -d"; };
-      programs.fish.shellAliases = mkIf cfg.vimdiffAlias { vimdiff = "nvim -d"; };
-      programs.zsh.shellAliases = mkIf cfg.vimdiffAlias { vimdiff = "nvim -d"; };
+      programs.bash.shellAliases = mkIf cfg.vimdiffAlias {vimdiff = "nvim -d";};
+      programs.fish.shellAliases = mkIf cfg.vimdiffAlias {vimdiff = "nvim -d";};
+      programs.zsh.shellAliases = mkIf cfg.vimdiffAlias {vimdiff = "nvim -d";};
     };
 }
