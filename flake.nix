@@ -2,11 +2,16 @@
   description = "Personal neovim configuration for NixOS";
 
   inputs = {
+    # NixOS packages
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    # Flake utils
+    flake-utils.url = "github:numtide/flake-utils";
+
+    # Neovim flake
+    neovim.url = "github:neovim/neovim?dir=contrib";
+    neovim.inputs.nixpkgs.follows = "nixpkgs";
+    neovim.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs = inputs @ {
