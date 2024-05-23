@@ -9,11 +9,8 @@ in rec {
     buildVimPlugin {
       name = "EntenVim";
       postInstall = ''
-        rm -rf $out/flake.lock
-        rm -rf $out/flake.nix
-        rm -rf $out/lib
       '';
-      src = ../.;
+      src = ../nvim;
     };
 
   mkNeovimPlugins = {system}: let
