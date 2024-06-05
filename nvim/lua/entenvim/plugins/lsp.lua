@@ -37,7 +37,7 @@ return {
 			-- Be aware that you also will need to properly configure your LSP server to
 			-- provide the inlay hints.
 			inlay_hints = {
-				enabled = false,
+				enabled = true,
 			},
 			-- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
 			-- Be aware that you also will need to properly configure your LSP server to
@@ -65,6 +65,9 @@ return {
 					-- keys = {},
 					settings = {
 						Lua = {
+							hint = {
+								enable = true, -- necessary
+							},
 							workspace = {
 								checkThirdParty = false,
 							},
@@ -73,6 +76,75 @@ return {
 							},
 							completion = {
 								callSnippet = "Replace",
+							},
+						},
+						clangd = {
+							InlayHints = {
+								Designators = true,
+								Enabled = true,
+								ParameterNames = true,
+								DeducedTypes = true,
+							},
+							fallbackFlags = { "-std=c++20" },
+						},
+						["rust-analyzer"] = {
+							inlayHints = {
+								bindingModeHints = {
+									enable = false,
+								},
+								chainingHints = {
+									enable = true,
+								},
+								closingBraceHints = {
+									enable = true,
+									minLines = 25,
+								},
+								closureReturnTypeHints = {
+									enable = "never",
+								},
+								lifetimeElisionHints = {
+									enable = "never",
+									useParameterNames = false,
+								},
+								maxLength = 25,
+								parameterHints = {
+									enable = true,
+								},
+								reborrowHints = {
+									enable = "never",
+								},
+								renderColons = true,
+								typeHints = {
+									enable = true,
+									hideClosureInitialization = false,
+									hideNamedConstructor = false,
+								},
+							},
+						},
+						tsserver = {
+							typescript = {
+								inlayHints = {
+									includeInlayParameterNameHints = "all",
+									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayVariableTypeHints = true,
+									includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+									includeInlayEnumMemberValueHints = true,
+								},
+							},
+							javascript = {
+								inlayHints = {
+									includeInlayParameterNameHints = "all",
+									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayVariableTypeHints = true,
+									includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+									includeInlayEnumMemberValueHints = true,
+								},
 							},
 						},
 						ltex = {
