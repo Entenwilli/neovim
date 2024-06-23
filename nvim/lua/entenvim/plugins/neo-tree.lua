@@ -9,9 +9,6 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-		deactivate = function()
-			vim.cmd([[Neotree close]])
-		end,
 		init = function()
 			if vim.fn.argc(-1) == 1 then
 				local stat = vim.uv.fs_stat(vim.fn.argv(0))
