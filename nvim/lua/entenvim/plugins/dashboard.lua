@@ -47,7 +47,7 @@ return {
 							key = "g",
 						},
 						{
-							action = [[lua LazyVim.telescope.config_files()()]],
+							action = [[lua EntenVim.telescope.config_files()()]],
 							desc = " Config",
 							icon = " ",
 							key = "c",

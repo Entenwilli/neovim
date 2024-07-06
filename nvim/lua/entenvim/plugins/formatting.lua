@@ -55,7 +55,7 @@ return {
 			---@class ConformOpts
 			local opts = {
 				log_level = vim.log.levels.DEBUG,
-				-- LazyVim will use these options when formatting with the conform.nvim formatter
+				-- EntenVim will use these options when formatting with the conform.nvim formatter
 				format = {
 					timeout_ms = 3000,
 					async = false, -- not recommended to change

@@ -2,7 +2,7 @@ _G.EntenVim = require("entenvim.util")
 
 local M = {}
 
-function M.setup(opts)
+function M.setup(_)
 	local group = vim.api.nvim_create_augroup("EntenVim", { clear = true })
 	vim.api.nvim_create_autocmd("User", {
 		group = group,

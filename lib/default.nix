@@ -41,6 +41,7 @@ in rec {
     nodePackages."pyright"
     nodePackages."typescript"
     nodePackages."yaml-language-server"
+    nodePackages.vscode-json-languageserver-bin
     pkgs.haskell-language-server
     pkgs.lua-language-server
     pkgs.rust-analyzer

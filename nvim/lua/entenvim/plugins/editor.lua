@@ -160,10 +160,7 @@ return {
 					if require("trouble").is_open() then
 						require("trouble").next({ skip_groups = true, jump = true })
 					else
-						local ok, err = pcall(vim.cmd.cnext)
-						if not ok then
-							vim.notify(err, vim.log.levels.ERROR)
-						end
+						vim.cmd.cnext()
 					end
 				end,
 				desc = "Next Trouble/Quickfix Item",
@@ -174,6 +171,7 @@ return {
 		"folke/todo-comments.nvim",
 		cmd = { "TodoTrouble", "TodoTelescope" },
 		config = true,
+		lazy = false,
     -- stylua: ignore
     keys = {
       { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },

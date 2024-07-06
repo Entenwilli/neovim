@@ -104,7 +104,7 @@ return {
 				"<leader>ss",
 				function()
 					require("entenvim.telescope.builtin").lsp_document_symbols({
-						symbols = require("lazyvim.config").get_kind_filter(),
+						symbols = require("entenvim.config").get_kind_filter(),
 					})
 				end,
 				desc = "Goto Symbol",
@@ -113,7 +113,7 @@ return {
 				"<leader>sS",
 				function()
 					require("entenvim.telescope.builtin").lsp_dynamic_workspace_symbols({
-						symbols = require("lazyvim.config").get_kind_filter(),
+						symbols = require("entenvim.config").get_kind_filter(),
 					})
 				end,
 				desc = "Goto Symbol (Workspace)",

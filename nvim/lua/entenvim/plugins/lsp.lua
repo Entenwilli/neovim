@@ -44,10 +44,21 @@ return {
 			codelens = {
 				enabled = true,
 			},
+			-- Enable lsp cursor word highlighting
+			document_highlight = {
+				enabled = true,
+			},
 			-- add any global capabilities here
-			capabilities = {},
+			capabilities = {
+				workspace = {
+					fileOperations = {
+						didRename = true,
+						willRename = true,
+					},
+				},
+			},
 			-- options for vim.lsp.buf.format
-			-- `bufnr` and `filter` is handled by the LazyVim formatter,
+			-- `bufnr` and `filter` is handled by the EntenVim  formatter,
 			-- but can be also overridden when specified
 			format = {
 				formatting_options = nil,
@@ -55,29 +66,45 @@ return {
 			},
 			-- LSP Server Settings
 			---@type lspconfig.options
+			---@diagnostic disable-next-line: missing-fields
 			servers = {
 				lua_ls = {
-					-- mason = false, -- set to false if you don't want this server to be installed with mason
-					-- Use this to add any additional keymaps
-					-- for specific lsp servers
-					---@type LazyKeysSpec[]
-					-- keys = {},
 					settings = {
+						---@diagnostic disable-next-line: missing-fields
 						Lua = {
+							---@diagnostic disable-next-line: missing-fields
 							hint = {
-								enable = true, -- necessary
+								enable = true,
+								setType = false,
+								paramType = true,
+								paramName = "Disable",
+								semicolon = "Disable",
+								arrayIndex = "Disable",
 							},
+							---@diagnostic disable-next-line: missing-fields
+							doc = {
+								privateName = { "^_" },
+							},
+							---@diagnostic disable-next-line: missing-fields
 							workspace = {
 								checkThirdParty = false,
 							},
+							---@diagnostic disable-next-line: missing-fields
 							codeLens = {
 								enable = true,
 							},
+							---@diagnostic disable-next-line: missing-fields
 							completion = {
 								callSnippet = "Replace",
 							},
 						},
+					},
+				},
+				clangd = {
+					settings = {
+						---@diagnostic disable-next-line: missing-fields
 						clangd = {
+							---@diagnostic disable-next-line: missing-fields
 							InlayHints = {
 								Designators = true,
 								Enabled = true,
@@ -86,70 +113,49 @@ return {
 							},
 							fallbackFlags = { "-std=c++20" },
 						},
-						["rust-analyzer"] = {
+					},
+				},
+				tsserver = {
+					settings = {
+						---@diagnostic disable-next-line: missing-fields
+						typescript = {
+							---@diagnostic disable-next-line: missing-fields
 							inlayHints = {
-								bindingModeHints = {
-									enable = false,
-								},
-								chainingHints = {
-									enable = true,
-								},
-								closingBraceHints = {
-									enable = true,
-									minLines = 25,
-								},
-								closureReturnTypeHints = {
-									enable = "never",
-								},
-								lifetimeElisionHints = {
-									enable = "never",
-									useParameterNames = false,
-								},
-								maxLength = 25,
-								parameterHints = {
-									enable = true,
-								},
-								reborrowHints = {
-									enable = "never",
-								},
-								renderColons = true,
-								typeHints = {
-									enable = true,
-									hideClosureInitialization = false,
-									hideNamedConstructor = false,
-								},
+								includeInlayParameterNameHints = "all",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
 							},
 						},
-						tsserver = {
-							typescript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-									includeInlayEnumMemberValueHints = true,
-								},
-							},
-							javascript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-									includeInlayEnumMemberValueHints = true,
-								},
+						---@diagnostic disable-next-line: missing-fields
+						javascript = {
+							---@diagnostic disable-next-line: missing-fields
+							inlayHints = {
+								includeInlayParameterNameHints = "all",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
 							},
 						},
+					},
+				},
+				ltex = {
+					settings = {
+						---@diagnostic disable-next-line: missing-fields
 						ltex = {
-							language = "en-us",
+							language = "en-US",
+							---@diagnostic disable-next-line: missing-fields
 							dictionary = {
-								["en-us"] = { "" },
+								["en-US"] = { "" },
+								["de-DE"] = { "" },
 							},
 							additionalrules = {
 								enablepickyrules = true,
@@ -188,8 +194,14 @@ return {
 				require("entenvim.user.keymaps").on_attach(client, buffer)
 			end)
 
+			EntenVim.lsp.setup()
+			EntenVim.lsp.on_dynamic_capability(require("entenvim.user.keymaps").on_attach)
+
+			EntenVim.lsp.words.setup(opts.document_highlight)
+
 			local register_capability = vim.lsp.handlers["client/registerCapability"]
 
+			---@diagnostic disable-next-line: duplicate-set-field
 			vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
 				---@diagnostic disable-next-line: no-unknown
 				local ret = register_capability(err, res, ctx)
@@ -245,6 +257,7 @@ return {
 
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
+			-- get all the servers that are available through mason-lspconfig
 			local servers = opts.servers
 			local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 			local capabilities = vim.tbl_deep_extend(
@@ -283,17 +296,37 @@ return {
 			for server, server_opts in pairs(servers) do
 				if server_opts then
 					server_opts = server_opts == true and {} or server_opts
-					-- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-					if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-						setup(server)
-					elseif server_opts.enabled ~= false then
-						ensure_installed[#ensure_installed + 1] = server
+					if server_opts.enabled ~= false then
+						-- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
+						if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
+							setup(server)
+						else
+							ensure_installed[#ensure_installed + 1] = server
+						end
 					end
 				end
 			end
 
 			if have_mason then
-				mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
+				mlsp.setup({
+					ensure_installed = vim.tbl_deep_extend(
+						"force",
+						ensure_installed,
+						EntenVim.opts("mason-lspconfig.nvim").ensure_installed or {}
+					),
+					handlers = { setup },
+				})
+			end
+
+			if EntenVim.lsp.is_enabled("denols") and EntenVim.lsp.is_enabled("vtsls") then
+				local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
+				EntenVim.lsp.disable("vtsls", is_deno)
+				EntenVim.lsp.disable("denols", function(root_dir, config)
+					if not is_deno(root_dir) then
+						config.settings.deno.enable = false
+					end
+					return false
+				end)
 			end
 		end,
 	},
@@ -314,12 +347,13 @@ return {
 				"ltex-ls",
 				"lua-language-server",
 				"nil",
-				"rust-analyzer",
 				"stylua",
 				"shfmt",
 				"tailwindcss-language-server",
 				"texlab",
 				"typescript-language-server",
+				"jdtls",
+				"json-lsp",
 			},
 		},
 		---@param opts MasonSettings | {ensure_installed: string[]}
@@ -373,7 +407,6 @@ return {
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-    { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
     { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
@@ -387,7 +420,7 @@ return {
     { "<leader>ds", function() require("dap").session() end, desc = "Session" },
     { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
     { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
-    { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
+    { "<leader>td", function() require("neotest").run.run({strategy = "dap", suite = false}) end, desc = "Debug Nearest" },
   },
 
 		config = function()
@@ -399,8 +432,9 @@ return {
 			-- setup dap config by VsCode launch.json file
 			local vscode = require("dap.ext.vscode")
 			local json = require("plenary.json")
+			---@diagnostic disable-next-line: duplicate-set-field
 			vscode.json_decode = function(str)
-				return vim.json.decode(json.json_strip_comments(str))
+				return vim.json.decode(json.json_strip_comments(str, {}))
 			end
 		end,
 	},

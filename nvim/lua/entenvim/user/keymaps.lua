@@ -1,5 +1,4 @@
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
 local keymap = vim.api.nvim_set_keymap
 
@@ -105,10 +104,10 @@ function M.resolve(buffer)
 		return {}
 	end
 	local spec = M.get()
-	local opts = plugin_opts("nvim-lspconfig")
+	local lsp_opts = plugin_opts("nvim-lspconfig")
 	local clients = EntenVim.lsp.get_clients({ bufnr = buffer })
 	for _, client in ipairs(clients) do
-		local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
+		local maps = lsp_opts.servers[client.name] and lsp_opts.servers[client.name].keys or {}
 		vim.list_extend(spec, maps)
 	end
 	return Keys.resolve(spec)
@@ -120,10 +119,10 @@ function M.on_attach(_, buffer)
 
 	for _, keys in pairs(keymaps) do
 		if not keys.has or M.has(buffer, keys.has) then
-			local opts = Keys.opts(keys)
-			opts.has = nil
-			opts.silent = opts.silent ~= false
-			opts.buffer = buffer
+			local key_opts = Keys.opts(keys)
+			key_opts.has = nil
+			key_opts.silent = opts.silent ~= false
+			key_opts.buffer = buffer
 			vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
 		end
 	end
