@@ -38,10 +38,10 @@ in rec {
     nodePackages."bash-language-server"
     nodePackages."diagnostic-languageserver"
     nodePackages."dockerfile-language-server-nodejs"
-    nodePackages."pyright"
+    pkgs.pyright
     nodePackages."typescript"
     nodePackages."yaml-language-server"
-    nodePackages.vscode-json-languageserver-bin
+    pkgs.vscode-langservers-extracted
     pkgs.haskell-language-server
     pkgs.lua-language-server
     pkgs.rust-analyzer
