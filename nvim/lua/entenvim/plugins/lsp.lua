@@ -1,3 +1,74 @@
+local languages = {}
+
+languages.dictionaries = {
+	["en-US"] = { vim.fn.stdpath("data") .. "/spell/en.txt" },
+	["de-DE"] = { vim.fn.stdpath("data") .. "/spell/de.txt" },
+}
+
+-- function to avoid interacting with the table directly
+function languages.getDictFiles(lang)
+	local files = languages.dictionaries[lang]
+	if files then
+		return files
+	else
+		return nil
+	end
+end
+
+-- combine words from all the files. Each line should contain one word
+function languages.readDictFiles(lang)
+	local files = languages.getDictFiles(lang)
+	local dict = {}
+	if files then
+		for _, file in ipairs(files) do
+			local f = io.open(file, "r")
+			if f then
+				for l in f:lines() do
+					table.insert(dict, l)
+				end
+			else
+				print("Can not read dict file %q", file)
+			end
+		end
+	else
+		print("Lang %q has no files", lang)
+	end
+	return dict
+end
+
+-- Append words to the last element of the language files
+function languages.addWordsToFiles(lang, words)
+	local files = languages.getDictFiles(lang)
+	if not files then
+		return print("no dictionary file defined for lang %q", lang)
+	else
+		local file = io.open(files[#files - 0], "a+")
+		if file then
+			for _, word in ipairs(words) do
+				file:write(word .. "\n")
+			end
+			file:close()
+		else
+			return print("Failed insert %q", vim.inspect(words))
+		end
+	end
+end
+
+local function on_attach(client, _)
+	local addToDict = function(command, _)
+		for _, arg in ipairs(command.arguments) do
+			for lang, words in pairs(arg.words) do
+				languages.addWordsToFiles(lang, words)
+				client.config.settings.ltex.dictionary = {
+					[lang] = languages.readDictFiles(lang),
+				}
+			end
+		end
+		return client.notify("workspace/didChangeConfiguration", client.config.settings)
+	end
+	vim.lsp.commands["_ltex.addToDictionary"] = addToDict
+end
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -148,14 +219,15 @@ return {
 					},
 				},
 				ltex = {
+					on_attach = on_attach,
 					settings = {
 						---@diagnostic disable-next-line: missing-fields
 						ltex = {
 							language = "en-US",
 							---@diagnostic disable-next-line: missing-fields
 							dictionary = {
-								["en-US"] = { "" },
-								["de-DE"] = { "" },
+								["en-US"] = languages.readDictFiles("en-US"),
+								["de-DE"] = languages.readDictFiles("de-DE"),
 							},
 							additionalrules = {
 								enablepickyrules = true,
