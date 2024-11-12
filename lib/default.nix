@@ -16,7 +16,7 @@ in {
 
   config = lib.mkIf config.programs.entenvim.enable (
     if isNixOSModule
-    then {environment.systemPackages = pkgs.mkNeovim {inherit system;};}
-    else {home.packages = pkgs.mkNeovim {inherit system;};}
+    then {environment.systemPackages = [pkgs.mkNeovim {inherit system;}];}
+    else {home.packages = [pkgs.mkNeovim {inherit system;}];}
   );
 }
