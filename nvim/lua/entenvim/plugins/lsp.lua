@@ -237,13 +237,21 @@ return {
 						},
 					},
 				},
-				nil_ls = {
+				nixd = {
 					settings = {
-						["nil"] = {
-							nix = {
-								flake = {
-									autoArchive = true,
-									autoEvalInputs = true,
+						nixd = {
+							nixpkgs = {
+								expr = 'import (builtins.getFlake "/home/felix/nixos/flake.nix").inputs.nixpkgs { }',
+							},
+							formatting = {
+								command = { "alejandra" },
+							},
+							options = {
+								nixos = {
+									expr = '(builtins.getFlake "/home/felix/nixos/flake.nix").nixosConfigurations.desktop.options',
+								},
+								home_manager = {
+									expr = '(builtins.getFlake "/home/felix/nixos/flake.nix").homeConfigurations.desktop.options',
 								},
 							},
 						},

@@ -50,6 +50,7 @@ in rec {
     pkgs.texlab
     pkgs.clang-tools
     pkgs.nil
+    pkgs.nixd
 
     # Formatter
     pkgs.alejandra
