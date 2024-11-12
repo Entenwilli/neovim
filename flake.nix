@@ -24,7 +24,7 @@
     in {
       homeManagerModules = {
         neovim = import "${self}/lib/default.nix" {
-          inherit self system;
+          inherit system inputs;
           isNixOSModule = false;
         };
         default = self.homeManagerModules.neovim;
@@ -32,7 +32,7 @@
 
       nixosModules = {
         neovim = import "${self}/lib/default.nix" {
-          inherit self system;
+          inherit system inputs;
           isNixOSModule = true;
         };
         default = self.nixosModules.neovim;

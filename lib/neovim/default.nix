@@ -1,7 +1,7 @@
 {
   neovim,
   neovimUtils,
-  wrapNeovimUnstable,
+  wrapNeovim,
   callPackage,
   lib,
   appName ? "entenvim",
@@ -48,7 +48,7 @@
     withRuby = false;
   };
 
-  nvim = wrapNeovimUnstable neovim (
+  nvim = wrapNeovim neovim (
     neovimConfig
     // {
       wrapperArgs = neovimConfig.wrapperArgs ++ extraWrapperArgs;
