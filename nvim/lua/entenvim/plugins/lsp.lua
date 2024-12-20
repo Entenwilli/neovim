@@ -74,7 +74,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-			{ "folke/neodev.nvim", opts = {} },
+			{ "folke/lazydev.nvim", opts = {} },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"folke/neoconf.nvim",
@@ -270,7 +270,7 @@ return {
 
 			-- Setup neoconf
 			require("neoconf").setup()
-			require("neodev").setup()
+			require("lazydev").setup()
 
 			-- setup keymaps
 			EntenVim.lsp.on_attach(function(client, buffer)
@@ -295,12 +295,10 @@ return {
 			end
 
 			-- diagnostics signs
-			if vim.fn.has("nvim-0.10.0") == 0 then
-				for severity, icon in pairs(opts.diagnostics.signs.text) do
-					local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-					name = "DiagnosticSign" .. name
-					vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-				end
+			for severity, icon in pairs(opts.diagnostics.signs.text) do
+				local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+				name = "DiagnosticSign" .. name
+				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 			end
 
 			-- inlay hints
