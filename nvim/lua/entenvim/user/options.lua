@@ -55,5 +55,4 @@ vim.opt.background = "dark"
 -- Neovide settings
 if vim.g.neovide then
 	vim.opt.guifont = "FiraCode Nerd Font:h14" -- the font used in graphical neovim applications
-	vim.g.neovide_scale_factor = 0.7
 end
