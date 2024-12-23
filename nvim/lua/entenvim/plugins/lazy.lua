@@ -46,6 +46,7 @@ return {
     keys = {
       { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      { "<leader>tf", function() Snacks.terminal({ "lazygit" }) end, desc = "Open lazygit" },
     },
 		config = function(_, opts)
 			local notify = vim.notify
