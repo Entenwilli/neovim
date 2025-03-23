@@ -4,6 +4,8 @@
   inputs = {
     # NixOS packages
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Neovim Nighly Overlay
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ {

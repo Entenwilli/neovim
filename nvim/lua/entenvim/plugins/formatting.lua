@@ -72,6 +72,8 @@ return {
 					latex = { "latex_fmt" },
 					tex = { "latex_fmt" },
 					plaintex = { "latex_fmt" },
+					vue = { "prettierd" },
+					typescript = { "prettierd" },
 				},
 				-- The options you set here will be merged with the builtin formatters.
 				-- You can also define any custom formatters here.

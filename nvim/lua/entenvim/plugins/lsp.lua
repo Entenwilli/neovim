@@ -107,7 +107,7 @@ return {
 			-- Be aware that you also will need to properly configure your LSP server to
 			-- provide the inlay hints.
 			inlay_hints = {
-				enabled = false,
+				enabled = true,
 			},
 			-- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
 			-- Be aware that you also will need to properly configure your LSP server to
@@ -186,37 +186,16 @@ return {
 						},
 					},
 				},
+				---@diagnostic disable-next-line: missing-fields
+				volar = {},
+				---@diagnostic disable-next-line: missing-fields
+				tailwindcss = {},
 				ts_ls = {
-					settings = {
-						---@diagnostic disable-next-line: missing-fields
-						typescript = {
-							---@diagnostic disable-next-line: missing-fields
-							inlayHints = {
-								includeInlayParameterNameHints = "all",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-						},
-						---@diagnostic disable-next-line: missing-fields
-						javascript = {
-							---@diagnostic disable-next-line: missing-fields
-							inlayHints = {
-								includeInlayParameterNameHints = "all",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-						},
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+					init_options = {
+						plugins = {},
 					},
+					settings = {},
 				},
 				ltex = {
 					on_attach = on_attach,
@@ -349,6 +328,10 @@ return {
 				opts.capabilities or {}
 			)
 
+			local mason_registry = require("mason-registry")
+			local vue_language_server = mason_registry.get_package("vue-language-server"):get_install_path()
+				.. "/node_modules/@vue/language-server"
+
 			local function setup(server)
 				local server_opts = vim.tbl_deep_extend("force", {
 					capabilities = vim.deepcopy(capabilities),
@@ -362,6 +345,15 @@ return {
 					if opts.setup["*"](server, server_opts) then
 						return
 					end
+				end
+
+				-- Inject vue_language_server plugin
+				if server == "ts_ls" then
+					table.insert(server_opts.init_options.plugins, {
+						name = "@vue/typescript-plugin",
+						location = vue_language_server,
+						languages = { "vue", "typescript", "javascript" },
+					})
 				end
 				require("lspconfig")[server].setup(server_opts)
 			end

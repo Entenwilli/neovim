@@ -7,6 +7,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"roobert/tailwindcss-colorizer-cmp.nvim",
 		},
 
 		opts = function()
@@ -39,18 +40,19 @@ return {
 					end,
 				}),
 				sources = cmp.config.sources({
+					{ name = "lazydev" },
 					{ name = "nvim_lsp" },
 					{ name = "path" },
 				}, {
 					{ name = "buffer" },
 				}),
 				formatting = {
-					format = function(_, item)
+					format = function(entry, item)
 						local icons = require("entenvim.user.icons").kinds
 						if icons[item.kind] then
 							item.kind = icons[item.kind] .. item.kind
 						end
-						return item
+						return require("tailwindcss-colorizer-cmp").formatter(entry, item)
 					end,
 				},
 				experimental = {
