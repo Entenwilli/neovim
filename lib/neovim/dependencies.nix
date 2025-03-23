@@ -39,6 +39,7 @@ in
     nil
     nixd
     pkgs."vue-language-server"
+    pkgs."tailwindcss-language-server"
 
     # Formatter
     alejandra

@@ -71,4 +71,7 @@ return {
 			end)
 		end,
 	},
+	{
+		"roobert/tailwindcss-colorizer-cmp.nvim",
+	},
 }
