@@ -38,6 +38,7 @@ in
     clang-tools
     nil
     nixd
+    pkgs."vue-language-server"
 
     # Formatter
     alejandra

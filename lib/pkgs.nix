@@ -51,6 +51,7 @@ in rec {
     pkgs.clang-tools
     pkgs.nil
     pkgs.nixd
+    pkgs."vue-language-server"
 
     # Formatter
     pkgs.alejandra

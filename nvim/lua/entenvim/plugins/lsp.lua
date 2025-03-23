@@ -435,6 +435,7 @@ return {
 				"typescript-language-server",
 				"jdtls",
 				"json-lsp",
+				"vue-language-server",
 			},
 		},
 		---@param opts MasonSettings | {ensure_installed: string[]}
