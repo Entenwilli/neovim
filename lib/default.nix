@@ -5,7 +5,6 @@
   ...
 }: {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -26,6 +25,15 @@
           postInstall = ''
           '';
           src = ../nvim;
+          nvimSkipModules = [
+            "entenvim.plugins.lazy"
+            "entenvim.plugins.telescope"
+            "entenvim.user.init"
+            "entenvim.user.lazy"
+            "entenvim.util.init"
+            "EntenVim"
+            "init"
+          ];
         };
         start = [EntenVim];
       in {inherit start;};
