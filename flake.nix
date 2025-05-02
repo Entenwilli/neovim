@@ -5,7 +5,10 @@
     # NixOS packages
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # Neovim Nighly Overlay
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
