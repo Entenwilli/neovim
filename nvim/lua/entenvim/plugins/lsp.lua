@@ -329,8 +329,8 @@ return {
 			)
 
 			local mason_registry = require("mason-registry")
-			local vue_language_server = mason_registry.get_package("vue-language-server"):get_install_path()
-				.. "/node_modules/@vue/language-server"
+			local vue_language_server =
+				vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server")
 
 			local function setup(server)
 				local server_opts = vim.tbl_deep_extend("force", {
@@ -362,7 +362,7 @@ return {
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 			local all_mslp_servers = {}
 			if have_mason then
-				all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+				all_mslp_servers = vim.tbl_keys(require("mason-lspconfig").get_mappings().lspconfig_to_package)
 			end
 
 			local ensure_installed = {} ---@type string[]
