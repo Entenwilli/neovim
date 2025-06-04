@@ -428,6 +428,7 @@ return {
 				"jdtls",
 				"json-lsp",
 				"vue-language-server",
+				"rust-analyzer",
 			},
 		},
 		---@param opts MasonSettings | {ensure_installed: string[]}
