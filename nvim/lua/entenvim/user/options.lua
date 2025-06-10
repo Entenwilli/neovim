@@ -10,6 +10,9 @@ vim.opt.clipboard = "unnamedplus"
 -- Set neovim command height
 vim.opt.cmdheight = 2
 
+-- Set relative line numbers
+vim.wo.relativenumber = true
+
 -- Set endoding
 vim.opt.fileencoding = "utf-8"
 
@@ -21,7 +24,6 @@ vim.opt.softtabstop = 2
 
 -- Enable line numbers
 vim.opt.number = true
-vim.opt.relativenumber = false
 vim.opt.numberwidth = 4
 
 -- Set completion options
