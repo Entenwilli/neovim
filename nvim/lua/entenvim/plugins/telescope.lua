@@ -110,6 +110,11 @@ return {
 				desc = "Goto Symbol",
 			},
 			{
+				"<leader>fp",
+				EntenVim.telescope.telescope("projects"),
+				desc = "Projects",
+			},
+			{
 				"<leader>sS",
 				function()
 					require("entenvim.telescope.builtin").lsp_dynamic_workspace_symbols({
