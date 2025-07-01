@@ -50,26 +50,25 @@ return {
 		},
 	},
 	{
-		"ahmedkhalf/project.nvim",
+		"coffebar/neovim-project",
 		opts = {
-			manual_mode = true,
+			projects = {
+				"~/development/*",
+				"~/nixos",
+			},
+			picker = {
+				type = "telescope",
+			},
 		},
-		event = "VeryLazy",
-		config = function(_, opts)
-			require("project_nvim").setup(opts)
-			local history = require("project_nvim.utils.history")
-			history.delete_project = function(project)
-				for k, v in pairs(history.recent_projects) do
-					if v == project.value then
-						history.recent_projects[k] = nil
-						return
-					end
-				end
-			end
-			EntenVim.on_load("telescope.nvim", function()
-				require("telescope").load_extension("projects")
-			end)
+		init = function()
+			vim.opt.sessionoptions:append("globals")
 		end,
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "Shatur/neovim-session-manager" },
+		},
+		lazy = false,
+		priority = 100,
 	},
 	{
 		"m4xshen/hardtime.nvim",

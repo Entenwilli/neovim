@@ -111,7 +111,7 @@ return {
 			},
 			{
 				"<leader>fp",
-				EntenVim.telescope.telescope("projects"),
+				"<cmd>NeovimProjectDiscover history<cr>",
 				desc = "Projects",
 			},
 			{
