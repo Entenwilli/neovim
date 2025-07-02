@@ -47,6 +47,7 @@ return {
       { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
       { "<leader>gg", function() Snacks.terminal({ "lazygit" }) end, desc = "Open lazygit" },
+      { "<leader>tf", function() Snacks.terminal({"fish"}) end, desc = "Open floating terminal"} ,
     },
 		config = function(_, opts)
 			local notify = vim.notify
