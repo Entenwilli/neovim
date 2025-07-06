@@ -25,7 +25,7 @@ in
     nodePackages."bash-language-server"
     nodePackages."diagnostic-languageserver"
     nodePackages."dockerfile-language-server-nodejs"
-    pyright
+    python313Packages.python-lsp-server
     nodePackages."typescript"
     nodePackages."yaml-language-server"
     vscode-langservers-extracted

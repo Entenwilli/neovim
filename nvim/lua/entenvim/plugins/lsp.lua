@@ -236,6 +236,7 @@ return {
 						},
 					},
 				},
+				pylsp = {},
 			},
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig
@@ -429,6 +430,7 @@ return {
 				"json-lsp",
 				"vue-language-server",
 				"rust-analyzer",
+				"python-lsp-server",
 			},
 		},
 		---@param opts MasonSettings | {ensure_installed: string[]}
