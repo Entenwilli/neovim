@@ -24,7 +24,7 @@ in
     # Language servers
     nodePackages."bash-language-server"
     nodePackages."diagnostic-languageserver"
-    nodePackages."dockerfile-language-server-nodejs"
+    dockerfile-language-server
     python313Packages.python-lsp-server
     nodePackages."typescript"
     nodePackages."yaml-language-server"
