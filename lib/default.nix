@@ -12,7 +12,7 @@
   inherit (vimUtils) buildVimPlugin;
   pkgs = inputs.nixpkgs.legacyPackages.${system};
   extraPackages = inputs.nixpkgs.legacyPackages.${system}.callPackage ./neovim/dependencies.nix {inherit system inputs;};
-  neovim = pkgs.wrapNeovim inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim {
+  neovim = pkgs.wrapNeovim inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim {
     configure = {
       customRC = ''
         lua << EOF

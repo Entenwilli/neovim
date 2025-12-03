@@ -71,7 +71,7 @@ in {
   };
 
   config = let
-    nvim = self.packages.${pkgs.system}.neovim.override {
+    nvim = self.packages.${stdenv.hostplatform.system}.neovim.override {
       inherit
         (cfg)
         appName
