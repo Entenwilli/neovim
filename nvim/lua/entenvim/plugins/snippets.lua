@@ -54,7 +54,6 @@ return {
 				end,
 			}
 			table.insert(opts.sources, { name = "luasnip" })
-			table.insert(opts.sources, { name = "crates" })
 		end,
 	},
 	"saadparwaiz1/cmp_luasnip",
