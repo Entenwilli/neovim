@@ -20,6 +20,7 @@ in
     gnutar
     gzip
     patchelf
+    libgcc
 
     # Language servers
     nodePackages."bash-language-server"
