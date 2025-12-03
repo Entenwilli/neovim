@@ -26,7 +26,18 @@ setmetatable(M, {
 function M.has(plugin)
 	return require("lazy.core.config").spec.plugins[plugin] ~= nil
 end
-
+---@param opts? LazyNotifyOpts
+function M.deprecate(old, new, opts)
+	M.warn(
+		("`%s` is deprecated. Please use `%s` instead"):format(old, new),
+		vim.tbl_extend("force", {
+			title = "LazyVim",
+			once = true,
+			stacktrace = true,
+			stacklevel = 6,
+		}, opts or {})
+	)
+end
 --@param fn fun()
 function M.on_very_lazy(fn)
 	vim.api.nvim_create_autocmd("User", {
