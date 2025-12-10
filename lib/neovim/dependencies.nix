@@ -34,6 +34,7 @@ in
     lua-language-server
     rust-analyzer
     ltex-ls
+    kdePackages.qtdeclarative
     marksman
     texlab
     clang-tools

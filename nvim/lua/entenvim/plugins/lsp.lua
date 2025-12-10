@@ -472,6 +472,7 @@ return {
 		opts = {
 			PATH = "append",
 			ensure_installed = {
+				"qmlls",
 				"astro-language-server",
 				"bash-language-server",
 				"clangd",
