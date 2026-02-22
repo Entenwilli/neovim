@@ -48,5 +48,5 @@ in
     rustfmt
     stylua
     prettierd
-    perl540Packages.LatexIndent
+    perl5Packages.LatexIndent
   ]
