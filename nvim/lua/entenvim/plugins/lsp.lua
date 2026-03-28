@@ -308,6 +308,7 @@ return {
 				volar = {},
 				---@diagnostic disable-next-line: missing-fields
 				tailwindcss = {},
+				glsl_analyzer = {},
 				ts_ls = {
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 					init_options = {
@@ -480,6 +481,7 @@ return {
 				"html-lsp",
 				"latexindent",
 				"ltex-ls",
+				"glsl_analyzer",
 				"lua-language-server",
 				"nil",
 				"stylua",
