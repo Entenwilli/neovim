@@ -2,7 +2,7 @@
   inputs,
   system,
 }: let
-  inherit (pkgs) nodePackages;
+  inherit (pkgs);
   pkgs = import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = true;
@@ -23,12 +23,12 @@ in
     libgcc
 
     # Language servers
-    nodePackages."bash-language-server"
-    nodePackages."diagnostic-languageserver"
+    bash-language-server
+    diagnostic-languageserver
     dockerfile-language-server
     python313Packages.python-lsp-server
-    nodePackages."typescript"
-    nodePackages."yaml-language-server"
+    typescript-language-server
+    yaml-language-server
     vscode-langservers-extracted
     haskell-language-server
     lua-language-server

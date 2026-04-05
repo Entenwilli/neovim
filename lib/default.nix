@@ -22,6 +22,7 @@
       packages.main = let
         EntenVim = buildVimPlugin {
           name = "EntenVim";
+          pname = "EntenVim";
           postInstall = ''
           '';
           src = ../nvim;
