@@ -41,7 +41,6 @@ in
     clang-tools
     nil
     nixd
-    vue-language-server
     tailwindcss-language-server
 
     # Formatter
