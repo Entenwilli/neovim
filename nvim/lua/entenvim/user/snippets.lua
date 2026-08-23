@@ -41,4 +41,37 @@ luasnip.add_snippets("nix", {
 			{ delimiters = "<>" }
 		)
 	),
+	luasnip.snippet(
+		{ trig = "nixmod" },
+		fmt(
+			[[ 
+          {
+            self,
+            inputs,
+            lib,
+            ...
+          }: {
+            flake.nixosModules.<>= {
+              pkgs,
+              config,
+              ...
+            }: {
+              imports = [
+                <>
+              ];
+
+              options = {
+                <>.enable = lib.mkEnableOption "<>";
+              };
+
+              config = lib.mkIf config.<>.enable {
+                <>
+              };
+            };
+          }
+      ]],
+			{ insert(1), insert(2), rep(1), insert(3), rep(1), insert(4) },
+			{ delimiters = "<>" }
+		)
+	),
 })
