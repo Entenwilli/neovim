@@ -1,0 +1,3 @@
+{
+  plugins.spectre.enable = true;
+}

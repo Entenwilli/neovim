@@ -2,47 +2,45 @@
   description = "Personal neovim configuration for NixOS";
 
   inputs = {
-    # NixOS packages
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # Neovim Nighly Overlay
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Nixpkgs
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    # NixVim
+    nixvim.url = "github:nix-community/nixvim";
+
+    # Flake parts
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # Import tree
+    import-tree.url = "github:vic/import-tree";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
+  outputs = {
+    nixvim,
+    flake-parts,
     ...
-  }: let
-    inherit (nixpkgs) lib;
-    withSystem = f:
-      lib.foldr lib.recursiveUpdate {} (
-        map f [
-          "x86_64-linux"
-        ]
-      );
+  } @ inputs: let
+    inherit (inputs.nixpkgs) lib;
+    inherit (lib.fileset) toList fileFilter;
+    isNixModule = file: file.hasExt "nix" && !lib.hasPrefix "_" file.name;
+    importTree = path: toList (fileFilter isNixModule path);
   in
-    withSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeManagerModules = {
-        neovim = import "${self}/lib/default.nix" {
-          inherit system inputs;
-          isNixOSModule = false;
-        };
-        default = self.homeManagerModules.neovim;
-      };
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
 
-      nixosModules = {
-        neovim = import "${self}/lib/default.nix" {
-          inherit system inputs;
-          isNixOSModule = true;
+      perSystem = {system, ...}: let
+        configuration = nixvim.lib.evalNixvim {
+          inherit system;
+          modules = importTree ./modules;
         };
-        default = self.nixosModules.neovim;
-      };
+      in {
+        checks.default = configuration.config.build.test;
 
-      formatter.${system} = pkgs.alejandra;
-    });
+        packages.default = configuration.config.build.package;
+      };
+    };
 }
