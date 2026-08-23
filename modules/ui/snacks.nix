@@ -2,11 +2,6 @@
   plugins.snacks = {
     enable = true;
     settings = {
-      explorer = {
-        enabled = true;
-        replace_netrw = true;
-        trash = true;
-      };
       indent.enabled = true;
       input.enabled = true;
       notifier.enabled = true;
@@ -36,14 +31,6 @@
   };
 
   keymaps = [
-    {
-      key = "<leader>e";
-      action = lib.nixvim.mkRaw ''
-        function()
-          Snacks.explorer()
-        end
-      '';
-    }
     {
       key = "<leader>gg";
       action = lib.nixvim.mkRaw ''

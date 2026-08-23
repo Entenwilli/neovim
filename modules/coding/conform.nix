@@ -1,18 +1,16 @@
-{
-  autoCmd = [
-    {
-      event = ["BufWritePre"];
-      callback.__raw = ''
-        function(args)
-          require("conform").format({ bufnr = args.buf })
-        end
-      '';
-    }
-  ];
-
+{...}: {
   plugins.conform-nvim = {
     enable = true;
+    autoInstall = {
+      enable = true;
+      enableWarnings = true;
+    };
+
     settings = {
+      format_on_save = {
+        timeout_ms = 200;
+        lsp_format = "fallback";
+      };
       formatters_by_ft = {
         nix = ["alejandra"];
       };
