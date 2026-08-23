@@ -7,8 +7,8 @@ local dynamic = luasnip.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 
-return {
-	require("luasnip").snippet(
+luasnip.add_snippets("nix", {
+	luasnip.snippet(
 		{ trig = "hmmod" },
 		fmt(
 			[[ 
@@ -41,4 +41,4 @@ return {
 			{ delimiters = "<>" }
 		)
 	),
-}
+})

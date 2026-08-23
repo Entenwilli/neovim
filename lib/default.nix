@@ -31,6 +31,7 @@
             "entenvim.user.init"
             "entenvim.user.lazy"
             "entenvim.util.init"
+            "entenvim.user.snippets"
             "EntenVim"
             "init"
           ];
