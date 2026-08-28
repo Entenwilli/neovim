@@ -81,8 +81,30 @@
         installRustc = false;
       };
       pylsp.enable = true;
-      nil_ls.enable = true;
       qmlls.enable = true;
+      nixd = {
+        enable = true;
+        settings = {
+          nixd = {
+            options = {
+              nixpkgs = {
+                expr = "import (builtins.getFlake (builtins.toString /home/felix/nixos)).inputs.nixpkgs { }";
+              };
+              formatting = {
+                command.__raw = "{ \"alejandra\" }";
+              };
+              options = {
+                nixos = {
+                  expr = "(builtins.getFlake (builtins.toString /home/felix/nixos)).nixosConfigurations.nixos-desktop.options";
+                };
+                home_manager = {
+                  expr = "(builtins.getFlake (builtins.toString /home/felix/nixos)).nixosConfigurations.nixos-desktop.options.home-manager.users.type.getSubOptions []";
+                };
+              };
+            };
+          };
+        };
+      };
     };
   };
 }
